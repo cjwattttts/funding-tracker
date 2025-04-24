@@ -50,6 +50,10 @@ const IndustryTrendChart = ({ data }) => {
         display: true,
         text: "Funding Trends by Industry",
         color: "#fff", // White title text
+        font: {
+          size: 20, // Match this to your bar chart title font size
+          weight: "bold",
+        },
       },
       tooltip: { mode: "index", intersect: false },
     },
