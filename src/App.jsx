@@ -38,9 +38,9 @@ function App() {
 
   const filteredData = fundingData.filter(d => {
     const industryMatch = selectedIndustry === "All" || d.industry === selectedIndustry;
-    const yearMatch = selectedYears.includes(d.year);
+    const yearMatch = selectedYears.includes(String(d.year)); // convert to string
     return industryMatch && yearMatch;
-  });
+  });  
 
   return (
     <div style={{ padding: "1rem" }}>
