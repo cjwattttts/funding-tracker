@@ -1,4 +1,4 @@
-/* index.css – Modern Dashboard Style */
+/* index.css – Upgraded Dashboard Style */
 
 body {
   margin: 0;
@@ -9,13 +9,16 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
   color: #ffffff;
+  letter-spacing: 0.5px;
 }
 
 label {
   font-size: 0.95rem;
+  font-weight: 500;
 }
 
 select,
@@ -27,6 +30,7 @@ input[type="checkbox"] {
   border: 1px solid #333;
   border-radius: 5px;
   padding: 0.4rem 0.6rem;
+  transition: all 0.2s ease;
 }
 
 select:focus,
@@ -49,9 +53,11 @@ button:hover {
 .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  justify-content: center;
   align-items: flex-start;
+  gap: 2rem;
   margin-bottom: 2rem;
+  text-align: left;
 }
 
 .year-checks {
@@ -78,7 +84,12 @@ button:hover {
 .chart-container {
   margin-top: 2rem;
   background-color: #1e1e1e;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
 }

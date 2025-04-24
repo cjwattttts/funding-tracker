@@ -20,13 +20,16 @@ const FundingBarChart = ({ data }) => {
     totalsByYear[year] = (totalsByYear[year] || 0) + amount;
   });
 
+  const labels = Object.keys(totalsByYear);
+  const values = Object.values(totalsByYear);
+
   const chartData = {
-    labels: Object.keys(totalsByYear),
+    labels,
     datasets: [
       {
         label: "Total Funding ($)",
-        data: Object.values(totalsByYear),
-        backgroundColor: "rgba(75,192,192,0.6)",
+        data: values,
+        backgroundColor: labels.map((_, i) => `hsl(${i * 50}, 70%, 60%)`),
       },
     ],
   };
@@ -34,8 +37,27 @@ const FundingBarChart = ({ data }) => {
   const options = {
     responsive: true,
     plugins: {
-      legend: { position: "top" },
-      title: { display: true, text: "Total Funding by Year" },
+      legend: { display: false },
+      title: {
+        display: true,
+        text: "Total Startup Funding by Year",
+        color: "#fff",
+        font: {
+          size: 18,
+          weight: "bold",
+        },
+        padding: { bottom: 20 },
+      },
+    },
+    scales: {
+      x: {
+        ticks: { color: "#fff" },
+        grid: { color: "#333" },
+      },
+      y: {
+        ticks: { color: "#fff" },
+        grid: { color: "#333" },
+      },
     },
   };
 
