@@ -55,19 +55,28 @@ function App() {
           ))}
         </select>
 
-        <label style={{ marginLeft: "1rem" }}>Years: </label>
-        <select
-          multiple
-          value={selectedYears}
+       <div style={{ marginTop: "1rem" }}>
+  <label style={{ fontWeight: "bold" }}>Years:</label>
+  <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginTop: "0.5rem" }}>
+    {uniqueYears.map((year, idx) => (
+      <label key={idx} style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+        <input
+          type="checkbox"
+          checked={selectedYears.includes(year)}
           onChange={(e) => {
-            const options = Array.from(e.target.selectedOptions, opt => opt.value);
-            setSelectedYears(options);
+            if (e.target.checked) {
+              setSelectedYears((prev) => [...prev, year]);
+            } else {
+              setSelectedYears((prev) => prev.filter((y) => y !== year));
+            }
           }}
-        >
-          {uniqueYears.map((yr, idx) => (
-            <option key={idx} value={yr}>{yr}</option>
-          ))}
-        </select>
+        />
+        {year}
+      </label>
+    ))}
+  </div>
+</div>
+
       </div>
 
       <FundingBarChart data={filteredData} />
