@@ -1,4 +1,4 @@
-/* index.css – Upgraded Dashboard Style */
+/* index.css – Upgraded Dashboard Style with Clean Filter Alignment */
 
 body {
   margin: 0;
@@ -11,7 +11,7 @@ body {
 h1 {
   font-size: 2.8rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   color: #ffffff;
   letter-spacing: 0.5px;
 }
@@ -55,16 +55,21 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
   text-align: left;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .year-checks {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 0.5rem;
 }
 
 .checkbox-label {

@@ -40,14 +40,33 @@ const IndustryTrendChart = ({ data }) => {
   const options = {
     responsive: true,
     plugins: {
-      legend: { position: "top" },
-      title: { display: true, text: "Funding Trends by Industry" },
+      legend: {
+        position: "top",
+        labels: {
+          color: "#fff", // White legend text
+        },
+      },
+      title: {
+        display: true,
+        text: "Funding Trends by Industry",
+        color: "#fff", // White title text
+      },
       tooltip: { mode: "index", intersect: false },
     },
     interaction: {
       mode: "nearest",
       axis: "x",
       intersect: false,
+    },
+    scales: {
+      x: {
+        ticks: { color: "#fff" }, // White x-axis labels
+        grid: { color: "rgba(255,255,255,0.1)" },
+      },
+      y: {
+        ticks: { color: "#fff" }, // White y-axis labels
+        grid: { color: "rgba(255,255,255,0.1)" },
+      },
     },
   };
 

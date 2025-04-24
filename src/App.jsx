@@ -45,8 +45,8 @@ function App() {
 
       <div className="filters">
         {/* Industry Filter */}
-        <div>
-          <label><strong>Industry:</strong></label>
+        <div className="filter-group">
+          <label>Industry:</label>
           <select
             value={selectedIndustry}
             onChange={(e) => setSelectedIndustry(e.target.value)}
@@ -59,11 +59,9 @@ function App() {
         </div>
 
         {/* Year Filter */}
-        <div>
-          <label><strong>Years:</strong></label>
-          <div style={{ marginTop: "0.25rem" }}>
-            <button onClick={() => setSelectedYears(uniqueYears)}>Select All Years</button>
-          </div>
+        <div className="filter-group">
+          <label>Years:</label>
+          <button onClick={() => setSelectedYears(uniqueYears)}>Select All Years</button>
           <div className="year-checks">
             {uniqueYears.map((year, idx) => (
               <label key={idx} className="checkbox-label">
