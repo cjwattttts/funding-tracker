@@ -27,11 +27,13 @@ const IndustryTrendChart = ({ data }) => {
 
   const chartData = {
     labels: years,
-    datasets: Object.entries(groupedData).map(([industry, yearlyData]) => ({
+    datasets: Object.entries(groupedData).map(([industry, yearlyData], index) => ({
       label: industry,
       data: years.map((y) => yearlyData[y] || 0),
       fill: false,
       borderWidth: 2,
+      borderColor: `hsl(${index * 40}, 70%, 60%)`,
+      tension: 0.3, // smooth curve
     })),
   };
 
@@ -40,6 +42,12 @@ const IndustryTrendChart = ({ data }) => {
     plugins: {
       legend: { position: "top" },
       title: { display: true, text: "Funding Trends by Industry" },
+      tooltip: { mode: "index", intersect: false },
+    },
+    interaction: {
+      mode: "nearest",
+      axis: "x",
+      intersect: false,
     },
   };
 
