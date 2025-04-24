@@ -5,16 +5,19 @@ import IndustryTrendChart from "./components/IndustryTrendChart";
 function App() {
   const [fundingData, setFundingData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const [selectedIndustry, setSelectedIndustry] = useState("All");
   const [selectedYears, setSelectedYears] = useState([]);
 
+  const uniqueIndustries = [...new Set(fundingData.map(d => d.industry))];
+  const uniqueYears = [...new Set(fundingData.map(d => d.year))].sort();
+
+  // Fetch and set data
   useEffect(() => {
     fetch("/funding.json")
       .then((res) => res.json())
       .then((data) => {
         setFundingData(data);
-        const years = [...new Set(data.map(d => d.year))].sort();
-        setSelectedYears(years);
         setLoading(false);
       })
       .catch((err) => {
@@ -23,10 +26,15 @@ function App() {
       });
   }, []);
 
-  if (loading) return <h2>Loading funding data...</h2>;
+  // Update selectedYears once fundingData is loaded
+  useEffect(() => {
+    if (fundingData.length > 0) {
+      const years = [...new Set(fundingData.map(d => d.year))].sort();
+      setSelectedYears(years);
+    }
+  }, [fundingData]);
 
-  const uniqueIndustries = [...new Set(fundingData.map(d => d.industry))];
-  const uniqueYears = [...new Set(fundingData.map(d => d.year))].sort();
+  if (loading) return <h2>Loading funding data...</h2>;
 
   const filteredData = fundingData.filter(d => {
     const industryMatch = selectedIndustry === "All" || d.industry === selectedIndustry;
