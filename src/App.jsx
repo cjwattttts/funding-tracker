@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import './index.css';
 import FundingBarChart from "./components/FundingBarChart";
 import IndustryTrendChart from "./components/IndustryTrendChart";
 
 function App() {
   const [fundingData, setFundingData] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [selectedIndustry, setSelectedIndustry] = useState("All");
   const [selectedYears, setSelectedYears] = useState([]);
 
@@ -22,13 +22,12 @@ function App() {
       });
   }, []);
 
-  // Use string years everywhere for consistent matching
   const uniqueIndustries = [...new Set(fundingData.map(d => d.industry))];
   const uniqueYears = [...new Set(fundingData.map(d => String(d.year)))].sort();
 
   useEffect(() => {
     if (fundingData.length > 0) {
-      setSelectedYears(uniqueYears); // default select all
+      setSelectedYears(uniqueYears);
     }
   }, [fundingData]);
 
@@ -41,17 +40,16 @@ function App() {
   if (loading) return <h2 style={{ padding: "1rem" }}>Loading funding data...</h2>;
 
   return (
-    <div style={{ padding: "1.5rem", fontFamily: "sans-serif", color: "white" }}>
+    <div className="container">
       <h1>Startup Funding Tracker</h1>
 
-      <div style={{ marginBottom: "1rem", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1.5rem" }}>
+      <div className="filters">
         {/* Industry Filter */}
         <div>
           <label><strong>Industry:</strong></label>
           <select
             value={selectedIndustry}
             onChange={(e) => setSelectedIndustry(e.target.value)}
-            style={{ marginLeft: "0.5rem", padding: "0.25rem" }}
           >
             <option value="All">All</option>
             {uniqueIndustries.map((ind, idx) => (
@@ -60,29 +58,15 @@ function App() {
           </select>
         </div>
 
-        {/* Year Filter with Select All */}
+        {/* Year Filter */}
         <div>
           <label><strong>Years:</strong></label>
           <div style={{ marginTop: "0.25rem" }}>
-            <button
-              style={{
-                padding: "4px 10px",
-                background: "#333",
-                color: "white",
-                border: "1px solid #555",
-                borderRadius: "5px",
-                cursor: "pointer",
-                fontSize: "0.9rem",
-              }}
-              onClick={() => setSelectedYears(uniqueYears)}
-            >
-              Select All Years
-            </button>
+            <button onClick={() => setSelectedYears(uniqueYears)}>Select All Years</button>
           </div>
-
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginTop: "0.5rem" }}>
+          <div className="year-checks">
             {uniqueYears.map((year, idx) => (
-              <label key={idx} style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+              <label key={idx} className="checkbox-label">
                 <input
                   type="checkbox"
                   checked={selectedYears.includes(year)}
@@ -101,9 +85,12 @@ function App() {
         </div>
       </div>
 
-      {/* Charts */}
-      <FundingBarChart data={filteredData} />
-      <IndustryTrendChart data={filteredData} />
+      <div className="chart-container">
+        <FundingBarChart data={filteredData} />
+      </div>
+      <div className="chart-container">
+        <IndustryTrendChart data={filteredData} />
+      </div>
     </div>
   );
 }
